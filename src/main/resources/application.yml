@@ -1,0 +1,30 @@
+spring:
+  jpa:
+    database: POSTGRESQL
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://localhost:5432/redesocialgamer
+    username: postgres
+    password: postgres
+    driverClassName: org.postgresql.Driver
+
+server:
+   port: 8080
+   error:
+     include-stacktrace: never
+
+security:
+  jwt:
+    token:
+      secret-key: secret-key
+      expire-length: 30000 # 5 minutes duration by default: 5 minutes * 60 seconds * 1000 miliseconds
+      
+UserController:
+  signin: Authenticates user and returns its JWT token.
+  signup: Creates user and returns its JWT token
+  delete: Deletes specific user by username
+  search: Returns specific user by username
+  me: Returns current user's data

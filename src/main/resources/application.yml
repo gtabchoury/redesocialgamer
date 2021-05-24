@@ -20,7 +20,7 @@ security:
   jwt:
     token:
       secret-key: secret-key
-      expire-length: 30000 # 5 minutes duration by default: 5 minutes * 60 seconds * 1000 miliseconds
+      expire-length: 3600000
       
 UserController:
   signin: Authenticates user and returns its JWT token.

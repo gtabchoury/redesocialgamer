@@ -18,6 +18,12 @@ public class GroupMember {
 	@Column
 	private Date joinDate;
 
+	@Column
+	private Date joinRequestDate;
+
+	@Column(columnDefinition = "boolean default false")
+	private Boolean approved;
+
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;

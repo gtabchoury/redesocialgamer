@@ -21,8 +21,6 @@ public class PublicController extends BaseController{
 
 	@PostMapping("register")
 	public ResponseEntity<UserDTO> register(@RequestBody UserRegisterDTO request){
-		User user = modelMapper.map(request, User.class);
-		UserDTO userDTO = modelMapper.map(userService.register(user), UserDTO.class);
-		return new ResponseEntity<>(userDTO, HttpStatus.CREATED);
+		return new ResponseEntity<>(new UserDTO(userService.register(request.getModel())), HttpStatus.CREATED);
 	}
 }

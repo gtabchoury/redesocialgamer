@@ -31,4 +31,10 @@ public class Post {
 	@ManyToOne
 	@JoinColumn(name = "group_id")
 	private Group group;
+
+	@OneToMany(mappedBy = "post")
+	private List<Comment> comments;
+
+	@OneToMany(mappedBy = "post")
+	private List<Like> likes;
 }

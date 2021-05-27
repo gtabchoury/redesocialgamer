@@ -12,12 +12,14 @@ public class GroupDTO {
 	private Long id;
 	private String name;
 	private String description;
-	private UserDTO owner;
+	private String type;
+	private SimpleUserDTO owner;
 
 	public GroupDTO(Group group){
 		this.id=group.getId();
 		this.name=group.getName();
 		this.description=group.getDescription();
-		this.owner=new UserDTO(group.getOwner());
+		this.type=group.getType();
+		this.owner=new SimpleUserDTO(group.getOwner());
 	}
 }

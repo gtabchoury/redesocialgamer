@@ -6,9 +6,8 @@ import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
-public class ErrorDTO {
-	private String field;
+public class DefaultDTO {
+	private Boolean success;
 	private String message;
 }
 

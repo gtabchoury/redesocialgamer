@@ -6,6 +6,6 @@ import rsg.model.User;
 import java.util.List;
 
 public interface GroupRepository extends JpaRepository<Group, Integer> {
-    public List<Group> getAllByOwner(User owner);
-    public Group getById(Long id);
+    Group getById(Long id);
+    List<Group> findAllByOwner(User owner);
 }

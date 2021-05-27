@@ -35,11 +35,14 @@ public class Group {
 	@JoinColumn(name = "owner_id")
 	private User owner;
 
+	@OneToMany(mappedBy = "group")
+	private List<GroupMember> groupMembers;
+
 	public Boolean isPublic(){
-		return this.type!=null && this.type.equals(TYPE_PUBLIC);
+		return getType()!=null && getType().equals(TYPE_PUBLIC);
 	}
 
 	public Boolean isPrivate(){
-		return this.type!=null && this.type.equals(TYPE_PRIVATE);
+		return getType()!=null && getType().equals(TYPE_PRIVATE);
 	}
 }

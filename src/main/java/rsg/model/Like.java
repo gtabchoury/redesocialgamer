@@ -8,10 +8,10 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "likes")
-public class Like {
+public class Like extends BaseModel{
 	@Id
-	@GeneratedValue(strategy= GenerationType.SEQUENCE, generator="id")
-	@SequenceGenerator(name="id", sequenceName="like_seq", allocationSize=1)
+	@GeneratedValue(strategy= GenerationType.SEQUENCE, generator="like_seq")
+	@SequenceGenerator(name="like_seq", sequenceName="like_seq", allocationSize=1)
 	private Long id;
 
 	@Column

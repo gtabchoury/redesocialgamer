@@ -1,6 +1,8 @@
 package rsg.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import rsg.dto.request.CreateGroupDTO;
@@ -39,6 +41,10 @@ public class GroupService {
 
 	public List<Group> getByUser(User user){
 		return groupRepository.findAllByOwner(user);
+	}
+
+	public Page<Group> getByUser(User user, Pageable pageable){
+		return groupRepository.findAllByOwner(user, pageable);
 	}
 
 	public Group getById(Long id){

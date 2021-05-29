@@ -8,10 +8,10 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "auth_token")
-public class AuthToken {
+public class AuthToken extends BaseModel{
 	@Id
-	@GeneratedValue(strategy= GenerationType.SEQUENCE, generator="id")
-	@SequenceGenerator(name="id", sequenceName="auth_token_seq", allocationSize=1)
+	@GeneratedValue(strategy= GenerationType.SEQUENCE, generator="auth_token_seq")
+	@SequenceGenerator(name="auth_token_seq", sequenceName="auth_token_seq", allocationSize=1)
 	private Long id;
 
 	@Column

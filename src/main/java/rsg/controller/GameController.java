@@ -1,6 +1,7 @@
 package rsg.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,11 +11,14 @@ import rsg.dto.response.GameDTO;
 import rsg.dto.response.GameRateDTO;
 import rsg.model.Game;
 import rsg.model.GameRate;
+import rsg.model.UserGame;
 import rsg.service.GameService;
 import rsg.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -27,10 +31,10 @@ public class GameController extends BaseController{
 	private UserService userService;
 
 	@GetMapping("/all")
-	public ResponseEntity<List<GameDTO>> getAllGames(){
-		List<GameDTO> games = gameService.getAllGames()
-				.stream().map(GameDTO::new).collect(Collectors.toList());
-		return new ResponseEntity<>(games, HttpStatus.OK);
+	public ResponseEntity<Map<String, Object>> getAllGames(HttpServletRequest req){
+		Page<Game> pageGames = gameService.getAllGames(getPageable(req));
+		List<GameDTO> games = pageGames.getContent().stream().map(GameDTO::new).collect(Collectors.toList());
+		return new ResponseEntity<>(getPaginatedResponse(pageGames, games), HttpStatus.OK);
 	}
 
 	@GetMapping("/{id}")
@@ -38,13 +42,6 @@ public class GameController extends BaseController{
 		Game game = gameService.getById(id);
 		game.setRatingScore(gameService.getScore(game.getId()));
 		return new ResponseEntity<>(new GameDTO(game), HttpStatus.OK);
-	}
-
-	@GetMapping("/my-games")
-	public ResponseEntity<List<GameDTO>> getMyGames(HttpServletRequest req){
-		List<GameDTO> games = gameService.getGamesByUser(userService.getByRequest(req))
-				.stream().map(GameDTO::new).collect(Collectors.toList());
-		return new ResponseEntity<>(games, HttpStatus.OK);
 	}
 
 	@PatchMapping("/{id}/add")

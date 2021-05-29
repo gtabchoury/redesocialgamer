@@ -1,6 +1,8 @@
 package rsg.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import rsg.dto.request.CreateCommentDTO;
@@ -60,6 +62,10 @@ public class PostService {
 
 	public List<Post> getByUser(User user){
 		return postRepository.findAllByUser(user);
+	}
+
+	public Page<Post> getByUser(User user, Pageable pageable){
+		return postRepository.findAllByUser(user, pageable);
 	}
 
 	public Post getById(Long id){

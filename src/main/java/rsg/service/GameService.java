@@ -1,6 +1,8 @@
 package rsg.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import rsg.dto.request.GameRateRequestDTO;
 import rsg.model.Game;
@@ -30,14 +32,21 @@ public class GameService {
 	}
 
 	public List<Game> getGamesByUser(User user){
-		return userGameRepository.findByUser(user)
+		return userGameRepository.findByUserAndActiveTrue(user)
 				.stream().map(UserGame::getGame)
-				.filter(game -> game.getActive())
 				.collect(Collectors.toList());
 	}
 
+	public Page<UserGame> getGamesByUser(User user, Pageable pageable){
+		return userGameRepository.findByUserAndActiveTrue(user, pageable);
+	}
+
 	public List<Game> getAllGames(){
-		return gameRepository.findByActiveTrue();
+		return gameRepository.findAllByActiveTrue();
+	}
+
+	public Page<Game> getAllGames(Pageable pageable){
+		return gameRepository.findAllByActiveTrue(pageable);
 	}
 
 	public void addUserGame(User user, Long idGame){

@@ -1,5 +1,7 @@
 package rsg.repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import rsg.model.Group;
 import rsg.model.GroupMember;
@@ -11,4 +13,5 @@ public interface GroupMemberRepository extends JpaRepository<GroupMember, Intege
     GroupMember getById(Long id);
     GroupMember findByUserAndAndGroup(User user, Group group);
     List<GroupMember> findByGroupAndApproved(Group group, Boolean approved);
+    Page<GroupMember> findByGroupAndApproved(Group group, Boolean approved, Pageable pageable);
 }

@@ -10,13 +10,13 @@ import org.springframework.context.annotation.Bean;
 import rsg.service.UserService;
 
 @SpringBootApplication
-public class JwtAuthServiceApp implements CommandLineRunner {
+public class RedeSocialGamerApp implements CommandLineRunner {
 
 	@Autowired
 	UserService userService;
 
 	public static void main(String[] args) {
-		SpringApplication.run(JwtAuthServiceApp.class, args);
+		SpringApplication.run(RedeSocialGamerApp.class, args);
 	}
 
 	@Bean

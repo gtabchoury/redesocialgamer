@@ -9,10 +9,10 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "group_members")
-public class GroupMember {
+public class GroupMember extends BaseModel{
 	@Id
-	@GeneratedValue(strategy= GenerationType.SEQUENCE, generator="id")
-	@SequenceGenerator(name="id", sequenceName="group_member_seq", allocationSize=1)
+	@GeneratedValue(strategy= GenerationType.SEQUENCE, generator="group_member_seq")
+	@SequenceGenerator(name="group_member_seq", sequenceName="group_member_seq", allocationSize=1)
 	private Long id;
 
 	@Column

@@ -1,11 +1,13 @@
 package rsg.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import rsg.model.Game;
-
 import java.util.List;
 
-public interface GameRepository extends JpaRepository<Game, Integer> {
+public interface GameRepository extends PagingAndSortingRepository<Game, Integer> {
     Game getById(Long id);
-    List<Game> findByActiveTrue();
+    Page<Game> findAllByActiveTrue(Pageable pageable);
+    List<Game> findAllByActiveTrue();
 }

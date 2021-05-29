@@ -1,6 +1,8 @@
 package rsg.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import rsg.model.Group;
 import rsg.model.GroupMember;
@@ -30,5 +32,9 @@ public class GroupMemberService {
 
 	public List<GroupMember> getMembers(Group group){
 		return groupMemberRepository.findByGroupAndApproved(group, true);
+	}
+
+	public Page<GroupMember> getMembers(Group group, Pageable pageable){
+		return groupMemberRepository.findByGroupAndApproved(group, true, pageable);
 	}
 }

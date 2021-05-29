@@ -9,18 +9,15 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "groups")
-public class Group {
+public class Group extends BaseModel{
 
 	public static final String TYPE_PRIVATE = "PRIVATE";
 	public static final String TYPE_PUBLIC = "PUBLIC";
 
 	@Id
-	@GeneratedValue(strategy= GenerationType.SEQUENCE, generator="id")
-	@SequenceGenerator(name="id", sequenceName="group_seq", allocationSize=1)
+	@GeneratedValue(strategy= GenerationType.SEQUENCE, generator="group_seq")
+	@SequenceGenerator(name="group_seq", sequenceName="group_seq", allocationSize=1)
 	private Long id;
-
-	@Column
-	private Date creationDate;
 
 	@Column
 	private String name;

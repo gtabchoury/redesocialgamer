@@ -1,6 +1,7 @@
 package rsg.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,7 @@ import rsg.service.UserService;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -58,10 +60,11 @@ public class GroupController extends BaseController{
 	}
 
 	@GetMapping("/{id}/members")
-	public ResponseEntity<List<GroupMemberDTO>> getMembers(HttpServletRequest req, @PathVariable Long id) {
+	public ResponseEntity<Map<String, Object>> getMembers(HttpServletRequest req, @PathVariable Long id) {
 		Group group = groupService.getById(id);
-		List<GroupMemberDTO> groupMemberDTOs = groupMemberService.getMembers(group).stream().map(GroupMemberDTO::new).collect(Collectors.toList());
-		return new ResponseEntity<>(groupMemberDTOs, HttpStatus.OK);
+		Page<GroupMember> pageGroupMembers = groupMemberService.getMembers(group, getPageable(req));
+		List<GroupMemberDTO> groupMembers = pageGroupMembers.getContent().stream().map(GroupMemberDTO::new).collect(Collectors.toList());
+		return new ResponseEntity<>(getPaginatedResponse(pageGroupMembers, groupMembers), HttpStatus.OK);
 	}
 
 	@PatchMapping("/{id}/requests/{idRequest}/approve")

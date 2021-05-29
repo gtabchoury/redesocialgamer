@@ -7,10 +7,10 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name = "game_rates")
-public class GameRate {
+public class GameRate extends BaseModel{
 	@Id
-	@GeneratedValue(strategy= GenerationType.SEQUENCE, generator="id")
-	@SequenceGenerator(name="id", sequenceName="game_rate_seq", allocationSize=1)
+	@GeneratedValue(strategy= GenerationType.SEQUENCE, generator="game_rate_seq")
+	@SequenceGenerator(name="game_rate_seq", sequenceName="game_rate_seq", allocationSize=1)
 	private Long id;
 
 	@Column

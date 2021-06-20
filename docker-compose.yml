@@ -1,0 +1,18 @@
+version: '3.1'
+services:
+  rds-api:
+    container_name: rds-api
+    image: springboot-postgresql
+    build: ./
+    ports:
+    - "8080:8080"
+    depends_on:
+      - rds-db
+  rds-db:
+    image: postgres
+    container_name: rds-db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5454:5432"

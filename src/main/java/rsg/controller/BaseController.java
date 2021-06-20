@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-public class BaseController {
+public class BaseController{
 	@Autowired
 	protected ModelMapper modelMapper;
 

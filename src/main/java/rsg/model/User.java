@@ -27,6 +27,10 @@ public class User extends BaseModel{
 	@Column
 	private String password;
 
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "profile_photo_id")
+	private File profilePhoto;
+
 	@OneToMany(mappedBy = "user")
 	private List<GroupMember> groupMembers;
 

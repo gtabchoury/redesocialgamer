@@ -3,18 +3,24 @@ spring:
     database: POSTGRESQL
     show-sql: false
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
   datasource:
     platform: postgres
     url: jdbc:postgresql://localhost:5432/rsg
     username: postgres
     password: postgres
     driverClassName: org.postgresql.Driver
+  servlet:
+    multipart:
+      max-file-size: 2MB
+      max-request-size: 2MB
 
 server:
    port: 8080
    error:
      include-stacktrace: never
+
+apiUrl: localhost:8080
 
 security:
   jwt:

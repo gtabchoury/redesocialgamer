@@ -6,7 +6,7 @@ spring:
       ddl-auto: create
   datasource:
     platform: postgres
-    url: jdbc:postgresql://rds-db:5454/rds
+    url: jdbc:postgresql://localhost:5454/rds
     username: postgres
     password: postgres
     driverClassName: org.postgresql.Driver

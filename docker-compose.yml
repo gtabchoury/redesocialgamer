@@ -1,5 +1,13 @@
 version: '3.1'
 services:
+  rsg-db:
+    image: postgres
+    container_name: rsg-db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=rsg
+
   rsg-api:
     container_name: rsg-api
     image: springboot-postgresql
@@ -8,11 +16,5 @@ services:
     - "8080:8080"
     depends_on:
       - rsg-db
-  rsg-db:
-    image: postgres
-    container_name: rsg-db
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-    ports:
-      - "5454:5432"
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://rsg-db:5432/rsg
